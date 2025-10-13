@@ -1,0 +1,55 @@
+Metadata-Version: 2.4
+Name: fishnet
+Version: 0.1.0
+Summary: Fish-Net (FI + YOLOv10-like) for DeepFish
+Author: Quan Le
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+
+# Fish-Net (FI + YOLOv10-like) cho DeepFish
+
+## Môi trường (Mac Apple Silicon, Metal/MPS)
+```bash
+python -m venv .venv && source .venv/bin/activate
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+> Trên macOS, PyTorch >= 2.1 tự hỗ trợ MPS (Metal). Nếu cần chỉ định:
+```
+# pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+```
+
+## Cấu hình
+```bash
+cp .env.example .env
+# sửa .env cho đường dẫn DATA_DIR, LOL_DIR (nếu pretrain FI)
+```
+
+## Chạy sanity check
+```bash
+python -m pip install -e .
+python tests/sanity_check.py
+```
+
+## Tiền huấn luyện FI trên LOL (khuyến nghị)
+```bash
+python scripts/pretrain_fi.py --config configs/deepfish.yaml --epochs 10
+```
+
+## Huấn luyện Fish-Net
+```bash
+python scripts/train_fishnet.py --config configs/deepfish.yaml --epochs 50
+```
+
+## Đánh giá
+```bash
+python scripts/eval_fishnet.py --config configs/deepfish.yaml --ckpt runs/fishnet/best.pt
+```
+
+## Suy luận 1 ảnh
+```bash
+python scripts/infer_image.py --ckpt runs/fishnet/best.pt --image demo.jpg --out out.jpg
+```

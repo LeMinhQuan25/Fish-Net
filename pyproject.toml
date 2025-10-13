@@ -1,0 +1,18 @@
+[project]
+name = "fishnet"
+version = "0.1.0"
+description = "Fish-Net (FI + YOLOv10-like) for DeepFish"
+authors = [{name = "Quan Le"}]
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}

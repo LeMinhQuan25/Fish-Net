@@ -1,0 +1,29 @@
+# Cấu hình nơi đặt đường dẫn dữ liệu và siêu tham số huấn luyện cho mô hình phát hiện đối tượng trên tập dữ liệu DeepFish.
+images_dir: "./deepfish/images"
+
+train_json: "./deepfish/annotations/deepfish_coco_train.json"
+val_json:   "./deepfish/annotations/deepfish_coco_val.json"
+test_json:  "./deepfish/annotations/deepfish_coco_test.json"
+
+# training
+img_size: 416
+batch_size: 1
+num_workers: 0
+lr: 0.0002
+weight_decay: 0.0005
+epochs: 30
+warmup_epochs: 2
+
+# FI (Swin)
+fi_channels: 32
+fi_blocks: 1
+swin_heads: 4
+swin_window: 7
+swin_mlp_dim: 96
+
+# detection head
+num_classes: 1
+
+# Mac M2
+num_workers: 0
+use_mps: true

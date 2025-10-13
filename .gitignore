@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual env, build
+.venv/
+env/
+build/
+dist/
+
+# Torch/weights/checkpoints
+*.pt
+*.pth
+*.onnx
+
+# Datasets & outputs
+runs/
+outputs/
+wandb/
+*.log
+*.csv
+
+# COCO preds
+*coco_pred.json
+
+# OS/editor
+.DS_Store
+.vscode/
+.idea/
+kgl_code/*.zip
