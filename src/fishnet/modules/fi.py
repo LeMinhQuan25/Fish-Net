@@ -9,7 +9,10 @@ class FE(nn.Module):
     def __init__(self, c, heads=8, window=7, mlp_dim=128):
         super().__init__()
         self.swin = SwinBlock(c, heads, window, mlp_dim)
-        self.deconv = nn.ConvTranspose2d(c, c, kernel_size=2, stride=1, padding=0)
+        # ConvTranspose2d với stride=1, padding=0 sẽ làm tăng kích thước theo H/W
+        # sau mỗi FE thêm 1 pixel, phá vỡ tính chia hết cho 2^n cần thiết của backbone.
+        # Ta dùng kernel=3, stride=1, padding=1 để giữ nguyên kích thước không gian.
+        self.deconv = nn.ConvTranspose2d(c, c, kernel_size=3, stride=1, padding=1)
     def forward(self, x):
         x = self.swin(x)
         x = self.deconv(x)
